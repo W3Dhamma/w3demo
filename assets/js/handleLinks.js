@@ -12,11 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (section) {
           section.scrollIntoView({ behavior: 'smooth' });
         } else {
-          window.location.href = '/error.html';
+          window.location.href = 'https://w3dhamma.github.io/w3demo/error';
         }
       } else {
         // Redirect to error page for undefined links
-        window.location.href = '/error.html';
+        window.location.href = 'https://w3dhamma.github.io/w3demo/error';
       }
     });
   });
