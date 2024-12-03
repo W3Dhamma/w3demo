@@ -35,16 +35,14 @@
     </nav>
 
     <div class="search-overlay">
-        <button class="search-close" aria-label="Close search"><i class="fas fa-times"></i></button>
-        <input type="search" id="search" placeholder="Search...">
-        <video class="search-animation" loop muted>
-            <source src="search-animation.webm" type="video/webm">
-            Your browser does not support the video tag.
-        </video>
+        <div class="search-close"><i class="fas fa-times"></i></div>
+        <input type="text" id="search" placeholder="Search...">
+        <img src="assets/images/search-animation.gif" alt="Searching..." class="search-animation">
         <div id="search-message"></div>
         <div class="search-results"></div>
         <button class="load-more" style="display: none;">Load More</button>
     </div>
+
 
     <div class="mobile-nav">
         <button class="mobile-nav-close" aria-label="Close menu"><i class="fas fa-times"></i></button>
