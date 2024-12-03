@@ -17,6 +17,7 @@ searchToggle.addEventListener('click', () => {
     searchOverlay.classList.add('active');
     hideContent();
     searchInput.focus();
+    document.querySelector('.search-animation').classList.remove('active');
 });
 
 searchClose.addEventListener('click', () => {
@@ -26,6 +27,7 @@ searchClose.addEventListener('click', () => {
     searchResults.innerHTML = '';
     searchMessage.textContent = '';
     loadMoreButton.style.display = 'none';
+    document.querySelector('.search-animation').classList.remove('active');
 });
 
 async function fetchAndSearchFile(filename) {
@@ -55,6 +57,9 @@ async function performSearch() {
 
     const searchAnimation = document.querySelector('.search-animation');
     searchAnimation.classList.add('active');
+
+    // Simulate a 5-second delay
+    await new Promise(resolve => setTimeout(resolve, 5000));
 
     try {
         allResults = [];
