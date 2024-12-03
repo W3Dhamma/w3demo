@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Error - W3Dhamma</title>
+        <meta name="description" content="Error page for W3Dhamma - Your gateway to modern Buddhist teachings.">
+        <meta name="keywords" content="Buddhism, Abhidhamma, Sutta, Vinaya, Dhamma, Meditation, Mindfulness">
+        <meta name="author" content="W3Dhamma">
+        <meta property="og:title" content="Error - W3Dhamma">
+        <meta property="og:description" content="Error page for W3Dhamma - Your gateway to modern Buddhist teachings.">
+        <meta property="og:image" content="https://w3dhamma.com/og-image.jpg">
+        <meta property="og:url" content="https://w3dhamma.com/error">
+        <meta name="twitter:card" content="summary_large_image">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <style>
+            :root {
+                --primary-color: #4a90e2;
+                --secondary-color: #f39c12;
+                --bg-color: #ffffff;
+                --text-color: #333333;
+                --nav-bg: #f8f9fa;
+                --card-bg: #ffffff;
+                --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .dark-mode {
+                --primary-color: #64b5f6;
+                --secondary-color: #ffd54f;
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --nav-bg: #1e1e1e;
+                --card-bg: #1e1e1e;
+                --card-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: 'Poppins', sans-serif;
+                background-color: var(--bg-color);
+                color: var(--text-color);
+                transition: background-color 0.3s, color 0.3s;
+                overflow-x: hidden;
+            }
+
+            #particles-js {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: -1;
+                pointer-events: none;
+            }
+
+            nav {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem 2rem;
+                background-color: var(--nav-bg);
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 1001;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease-in-out;
+            }
+
+            nav.hidden {
+                transform: translateY(-100%);
+            }
+
+            .logo {
+                font-size: 1.8rem;
+                font-weight: 600;
+                color: var(--primary-color);
+                text-decoration: none;
+                transition: color 0.3s;
+            }
+
+            .logo:hover {
+                color: var(--secondary-color);
+            }
+
+            .nav-links {
+                display: flex;
+                flex-grow: 1;
+                justify-content: center;
+            }
+
+            .nav-links a {
+                flex: 1;
+                text-align: center;
+                padding: 0.5rem 1rem;
+                color: var(--text-color);
+                text-decoration: none;
+                font-weight: 400;
+                transition: color 0.3s;
+                position: relative;
+            }
+
+            .nav-links a::after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 2px;
+                bottom: -5px;
+                left: 0;
+                background-color: var(--primary-color);
+                transition: width 0.3s;
+            }
+
+            .nav-links a:hover::after {
+                width: 100%;
+            }
+
+            .nav-right {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .search-container {
+                position: relative;
+                display: flex;
+                align-items: center;
+            }
+
+            .search-toggle {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                background-color: var(--bg-color);
+                color: var(--text-color);
+                border: 1px solid var(--text-color);
+                font-size: 1.2rem;
+            }
+
+            .search-toggle:hover {
+                box-shadow: 0 0 10px var(--primary-color);
+            }
+
+            .search-toggle:active {
+                box-shadow: 0 0 15px var(--secondary-color);
+            }
+
+            .search-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: var(--bg-color);
+                z-index: 1002;
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 2rem;
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.3s ease, visibility 0.3s ease;
+            }
+
+            .search-overlay.active {
+                display: flex;
+                opacity: 1;
+                visibility: visible;
+            }
+
+            #search {
+                width: 80%;
+                max-width: 600px;
+                padding: 0.5rem 1rem;
+                font-size: 1.2rem;
+                border: none;
+                border-bottom: 2px solid var(--primary-color);
+                background-color: transparent;
+                color: var(--text-color);
+                margin-bottom: 2rem;
+            }
+
+            #search:focus {
+                outline: none;
+            }
+
+            .search-close {
+                position: absolute;
+                top: 1.6rem;
+                right: 1rem;
+                font-size: 1.5rem;
+                cursor: pointer;
+                color: var(--text-color);
+            }
+
+            .dark-mode-toggle {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                background-color: var(--bg-color);
+                color: var(--text-color);
+                border: 1px solid var(--text-color);
+                font-size: 1.2rem;
+            }
+
+            .dark-mode-toggle:hover {
+                box-shadow: 0 0 10px var(--primary-color);
+            }
+
+            .dark-mode-toggle:active {
+                box-shadow: 0 0 15px var(--secondary-color);
+            }
+
+            .menu-toggle {
+                display: none;
+                background: none;
+                font-size: 1.5rem;
+                color: var(--text-color);
+                cursor: pointer;
+                transition: color 0.3s;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                background-color: var(--bg-color);
+                color: var(--text-color);
+                border: 1px solid var(--text-color);
+                font-size: 1.2rem;
+            }
+
+            .menu-toggle:hover {
+                color: var(--primary-color);
+            }
+
+            .mobile-nav {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 1003;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                background-color: var(--bg-color);
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.3s ease, visibility 0.3s ease;
+            }
+
+            .mobile-nav.active {
+                display: flex;
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .mobile-nav a {
+                color: var(--text-color);
+                font-size: 1.5rem;
+                margin: 1rem 0;
+                text-decoration: none;
+            }
+
+            .mobile-nav-close {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                font-size: 2rem;
+                color: var(--text-color);
+                cursor: pointer;
+            }
+
+            main {
+                max-width: 100%;
+                margin: 5rem auto 2rem;
+                padding: 0 2rem;
+                transition: opacity 0.3s ease;
+            }
+
+            .error-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: calc(100vh - 12rem);
+                text-align: center;
+                padding: 0 20px;
+            }
+
+            .error-code {
+                font-size: 8rem;
+                color: var(--primary-color);
+                margin-bottom: 1rem;
+            }
+
+            .error-message {
+                font-size: 2rem;
+                color: var(--secondary-color);
+                margin-bottom: 2rem;
+            }
+
+            .error-description {
+                font-size: 1.2rem;
+                margin-bottom: 2rem;
+                max-width: 600px;
+            }
+
+            .home-button {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: var(--primary-color);
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+                transition: background-color 0.3s;
+            }
+
+            .home-button:hover {
+                background-color: var(--secondary-color);
+            }
+
+            footer {
+                background-color: var(--nav-bg);
+                color: var(--text-color);
+                padding: 2rem;
+                margin-top: 4rem;
+                transition: opacity 0.3s ease;
+            }
+
+            .footer-content {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 2rem;
+            }
+
+            .footer-section {
+                background-color: var(--card-bg);
+                border-radius: 8px;
+                padding: 1.5rem;
+                transition: transform 0.3s, box-shadow 0.3s;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .footer-section h3 {
+                color: var(--primary-color);
+                margin-bottom: 1rem;
+                font-size: 1.2rem;
+            }
+
+            .footer-section ul {
+                list-style-type: none;
+                padding: 0;
+            }
+
+            .footer-section ul li {
+                margin-bottom: 0.5rem;
+            }
+
+            .footer-section ul li a {
+                color: var(--text-color);
+                text-decoration: none;
+                transition: color 0.3s;
+            }
+
+            .footer-section ul li a:hover {
+                color: var(--primary-color);
+            }
+
+            .copyright {
+                text-align: center;
+                padding-top: 2rem;
+                font-size: 0.9rem;
+                opacity: 0;
+                transform: translateY(20px);
+                animation: fadeInUp 0.5s ease forwards;
+            }
+
+            .datetime {
+                font-size: 1rem;
+                margin-top: 0.5rem;
+                opacity: 0;
+                transform: translateY(20px);
+                animation: fadeInUp 0.5s ease forwards 0.2s;
+            }
+
+            .page-views {
+                font-size: 1rem;
+                margin-top: 0.5rem;
+                opacity: 0;
+                transform: translateY(20px);
+                animation: fadeInUp 0.5s ease forwards 0.4s;
+            }
+
+            @keyframes fadeInUp {
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            @media (max-width: 768px) {
+                .menu-toggle {
+                    display: flex;
+                }
+
+                .nav-links {
+                    display: none;
+                }
+
+                nav {
+                    padding: 1rem;
+                }
+
+                .logo {
+                    font-size: 1.5rem;
+                }
+
+                .error-code {
+                    font-size: 6rem;
+                }
+
+                .error-message {
+                    font-size: 1.5rem;
+                }
+
+                .error-description {
+                    font-size: 1rem;
+                }
+            }
+
+            @media (max-width: 480px) {
+                main {
+                    padding: 0 1rem;
+                }
+
+                .error-code {
+                    font-size: 4rem;
+                }
+
+                .error-message {
+                    font-size: 1.2rem;
+                }
+
+                .error-description {
+                    font-size: 0.9rem;
+                }
+            }
+
+            @media (min-width: 1024px) {
+                nav {
+                    padding: 1rem 4rem;
+                }
+
+                .nav-links {
+                    justify-content: flex-end;
+                }
+
+                .nav-links a {
+                    margin-left: 2rem;
+                }
+
+                .nav-right {
+                    margin-left: 2rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="particles-js"></div>
+        <nav>
+            <a href="/" class="logo">W3Dhamma</a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/abhidhamma">Abhidhamma</a>
+                <a href="/sutta">Sutta</a>
+                <a href="/vinaya">Vinaya</a>
+                <a href="/changelog">Changelog</a>
+            </div>
+            <div class="nav-right">
+                <button class="search-toggle" aria-label="Toggle search">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="dark-mode-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-sun"></i>
+                </button>
+                <button class="menu-toggle" aria-label="Toggle navigation menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+        <div class="search-overlay">
+            <button class="search-close" aria-label="Close search">
+                <i class="fas fa-times"></i>
+            </button>
+            <input type="search" id="search" placeholder="Search...">
+            <div id="search-message"></div>
+            <div class="search-results"></div>
+        </div>
+        <div class="mobile-nav">
+            <button class="mobile-nav-close" aria-label="Close menu">
+                <i class="fas fa-times"></i>
+            </button>
+            <a href="/">Home</a>
+            <a href="/abhidhamma">Abhidhamma</a>
+            <a href="/sutta">Sutta</a>
+            <a href="/vinaya">Vinaya</a>
+            <a href="/changelog">Changelog</a>
+        </div>
+        <main>
+            <div class="error-container">
+                <div class="error-code">404</div>
+                <h1 class="error-message">Page Not Found</h1>
+                <p class="error-description">We're sorry, but the page you're looking for doesn't exist or has been moved. Please check the URL or return to our homepage.</p>
+                <a href="https://w3dhamma.github.io/w3dhamma/" class="home-button">Return to Homepage</a>
+            </div>
+        </main>
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About W3Dhamma</h3>
+                    <p>W3Dhamma is a modern platform dedicated to making Buddhist teachings accessible in the digital age. We offer comprehensive resources on Abhidhamma, Sutta, and Vinaya, aiming to bridge ancient wisdom with contemporary understanding.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/abhidhamma">Abhidhamma</a></li>
+                        <li><a href="/sutta">Sutta</a></li>
+                        <li><a href="/vinaya">Vinaya</a></li>
+                        <li><a href="/changelog">Changelog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <ul>
+                        <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                        <li><a href="#"><i class="far fa-envelope"></i> Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; <span id="current-year"></span> W3Dhamma. All rights reserved.</p>
+                <p class="datetime" id="current-datetime"></p>
+                <p class="page-views">Current Page Views: <span id="page-views-count">1</span></p>
+            </div>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+        <script>
+            const particlesConfig = {
+                particles: {
+                    number: {
+                        value: 100,
+                        density: {
+                            enable: true,
+                            value_area: 800
+                        }
+                    },
+                    color: {
+                        value: ["#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#FF00FF", "#00FFFF", "#FFA500", "#800080", "#008000", "#FFC0CB"]
+                    },
+                    shape: {
+                        type: "circle"
+                    },
+                    opacity: {
+                        value: 0.5,
+                        random: true,
+                        anim: {
+                            enable: true,
+                            speed: 1,
+                            opacity_min: 0.1,
+                            sync: false
+                        }
+                    },
+                    size: {
+                        value: 3,
+                        random: true,
+                        anim: {
+                            enable: true,
+                            speed: 2,
+                            size_min: 0.1,
+                            sync: false
+                        }
+                    },
+                    line_linked: {
+                        enable: false
+                    },
+                    move: {
+                        enable: true,
+                        speed: 0.5,
+                        direction: "none",
+                        random: true,
+                        straight: false,
+                        out_mode: "out",
+                        bounce: false
+                    }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: {
+                            enable: true,
+                            mode: "bubble"
+                        },
+                        onclick: {
+                            enable: true,
+                            mode: "push"
+                        },
+                        resize: true
+                    },
+                    modes: {
+                        bubble: {
+                            distance: 200,
+                            size: 6,
+                            duration: 2,
+                            opacity: 0.8,
+                            speed: 3
+                        },
+                        push: {
+                            particles_nb: 4
+                        }
+                    }
+                },
+                retina_detect: true
+            };
+            particlesJS('particles-js', particlesConfig);
+
+            // Dark mode toggle
+            const darkModeToggle = document.querySelector('.dark-mode-toggle');
+            const body = document.body;
+            body.classList.add('dark-mode');
+            updateDarkModeIcon();
+
+            darkModeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+                updateDarkModeIcon();
+            });
+
+            function updateDarkModeIcon() {
+                const isDarkMode = body.classList.contains('dark-mode');
+                darkModeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            }
+
+            // Mobile menu toggle
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mobileNav = document.querySelector('.mobile-nav');
+            const mobileNavClose = document.querySelector('.mobile-nav-close');
+
+            menuToggle.addEventListener('click', () => {
+                mobileNav.classList.add('active');
+            });
+
+            mobileNavClose.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+            });
+
+            // Search functionality
+            const searchToggle = document.querySelector('.search-toggle');
+            const searchOverlay = document.querySelector('.search-overlay');
+            const searchClose = document.querySelector('.search-close');
+            const searchInput = document.getElementById('search');
+            const searchResults = document.querySelector('.search-results');
+            const searchMessage = document.getElementById('search-message');
+
+            searchToggle.addEventListener('click', () => {
+                searchOverlay.classList.add('active');
+                searchInput.focus();
+            });
+
+            searchClose.addEventListener('click', () => {
+                searchOverlay.classList.remove('active');
+                searchInput.value = '';
+                searchResults.innerHTML = '';
+                searchMessage.textContent = '';
+            });
+
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+
+            function performSearch() {
+                const searchTerm = searchInput.value.toLowerCase();
+                searchResults.innerHTML = '';
+                searchMessage.textContent = 'Searching...';
+
+                if (searchTerm.trim() === '') {
+                    searchMessage.textContent = '';
+                    return;
+                }
+
+                // Simulated search results
+                setTimeout(() => {
+                    searchMessage.textContent = 'No results found.';
+                }, 1000);
+            }
+
+            // Current year, date, and time
+            function updateDateTime() {
+                const now = new Date();
+                const options = { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric', 
+                    hour: '2-digit', 
+                    minute: '2-digit', 
+                    second: '2-digit',
+                    hour12: true
+                };
+                document.getElementById('current-year').textContent = now.getFullYear();
+                document.getElementById('current-datetime').textContent = now.toLocaleDateString('en-US', options);
+            }
+
+            updateDateTime();
+            setInterval(updateDateTime, 1000);
+
+            // Page view counter (simulated)
+            let pageViews = 1;
+            function updatePageViews() {
+                pageViews++;
+                document.getElementById('page-views-count').textContent = pageViews;
+            }
+
+            setInterval(updatePageViews, 5000); // Increment every 5 seconds for demonstration
+        </script>
+    </body>
+</html>
