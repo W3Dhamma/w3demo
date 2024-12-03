@@ -3,257 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>W3Dhamma - Modern Buddhist Teachings</title>
-    <meta name="description" content="W3Dhamma - Your gateway to modern Buddhist teachings including Abhidhamma, Sutta, and Vinaya.">
-    <meta name="keywords" content="Buddhism, Abhidhamma, Sutta, Vinaya, Dhamma, Meditation, Mindfulness">
-    <meta name="author" content="W3Dhamma">
-    <meta property="og:title" content="W3Dhamma - Modern Buddhist Teachings">
-    <meta property="og:description" content="Explore the profound teachings of Buddhism with W3Dhamma. Learn about Abhidhamma, Sutta, and Vinaya in the digital age.">
-    <meta property="og:image" content="https://w3dhamma.com/og-image.jpg">
-    <meta property="og:url" content="https://w3dhamma.com">
-    <meta name="twitter:card" content="summary_large_image">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
-    <script src="animations.js"></script>
-     <script src="contactForm.js"></script>
-     <script src="darkMode.js"></script>
-     <script src="main.js"></script>
-     <script src="navigation.js"></script>
-     <script src="particles.js"></script>
-     <script src="search.js"></script>
-     <script src="script.js"></script>
+    <title>W3Dhamma</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
     <div id="particles-js"></div>
+    
     <nav>
         <a href="#" class="logo">W3Dhamma</a>
         <div class="nav-links">
             <a href="#home">Home</a>
-            <a href="#abhidhamma">Abhidhamma</a>
-            <a href="#sutta">Sutta</a>
-            <a href="#vinaya">Vinaya</a>
-            <a href="#changelog">Changelog</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
         </div>
         <div class="nav-right">
-            <button class="search-toggle" aria-label="Toggle search"><i class="fas fa-search"></i></button>
-            <button class="dark-mode-toggle" aria-label="Toggle dark mode"><i class="fas fa-sun"></i></button>
-            <button class="menu-toggle" aria-label="Toggle navigation menu"><i class="fas fa-bars"></i></button>
+            <div class="search-container">
+                <div class="search-toggle"><i class="fas fa-search"></i></div>
+            </div>
+            <div class="dark-mode-toggle"><i class="fas fa-moon"></i></div>
+            <div class="menu-toggle"><i class="fas fa-bars"></i></div>
         </div>
     </nav>
 
+    <div class="mobile-nav">
+        <div class="mobile-nav-close"><i class="fas fa-times"></i></div>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+    </div>
+
     <div class="search-overlay">
-        <button class="search-close" aria-label="Close search"><i class="fas fa-times"></i></button>
-        <input type="search" id="search" placeholder="Search...">
-        <video class="search-animation" loop muted>
-            <source src="search-animation.webm" type="video/webm">
-            Your browser does not support the video tag.
-        </video>
+        <div class="search-close"><i class="fas fa-times"></i></div>
+        <input type="text" id="search" placeholder="Search...">
         <div id="search-message"></div>
         <div class="search-results"></div>
         <button class="load-more" style="display: none;">Load More</button>
     </div>
 
-    <div class="mobile-nav">
-        <button class="mobile-nav-close" aria-label="Close menu"><i class="fas fa-times"></i></button>
-        <a href="#home">Home</a>
-        <a href="#abhidhamma">Abhidhamma</a>
-        <a href="#sutta">Sutta</a>
-        <a href="#vinaya">Vinaya</a>
-        <a href="#changelog">Changelog</a>
-    </div>
-
     <main>
-        <section id="home" class="fade-in">
-            <div class="home-section">
-                <h3>About W3Dhamma</h3>
-                <p class="font">
-                    W3Dhamma is a modern platform dedicated to making Buddhist teachings accessible in the digital age. We offer comprehensive resources on Abhidhamma, Sutta, and Vinaya, aiming to bridge ancient wisdom with contemporary understanding.
-                </p>
-            </div>
+        <section id="home" class="home-section">
+            <h1>Welcome to W3Dhamma</h1>
+            <p>Discover the path to enlightenment through web development.</p>
+        </section>
+
+        <section id="about">
+            <h2>About Us</h2>
+            <p>W3Dhamma is your guide to mastering web development with a zen-like approach.</p>
+        </section>
+
+        <section id="services">
+            <h2>Our Services</h2>
             <div class="card-container">
                 <div class="card">
-                    <h2>Abhidhamma</h2>
-                    <p>
-                        Dive deep into the philosophical and psychological aspects of Buddhism.
-                    </p>
+                    <h3>Web Design</h3>
+                    <p>Create beautiful and functional websites that resonate with your audience.</p>
                 </div>
                 <div class="card">
-                    <h2>Sutta</h2>
-                    <p>
-                        Explore the discourses of the Buddha, containing core teachings and practices.
-                    </p>
+                    <h3>Front-end Development</h3>
+                    <p>Build responsive and interactive user interfaces using modern technologies.</p>
                 </div>
                 <div class="card">
-                    <h2>Vinaya</h2>
-                    <p>
-                        Learn about the monastic code of conduct and its relevance to lay practitioners.
-                    </p>
+                    <h3>Back-end Development</h3>
+                    <p>Develop robust server-side applications and APIs to power your web projects.</p>
                 </div>
             </div>
         </section>
 
-        <section id="abhidhamma">
-            <h1>Abhidhamma</h1>
-            <div class="card-container">
-                <div class="card">
-                    <h2>Introduction to Abhidhamma</h2>
-                    <p>
-                        Abhidhamma, meaning 'higher doctrine', is the third basket of the Tipitaka, the canonical scriptures of Buddhism. It offers a detailed psychological and philosophical analysis of the nature of reality.
-                    </p>
-                </div>
-                <div class="card">
-                    <h2>The Seven Books of Abhidhamma</h2>
-                    <p>
-                        The Abhidhamma Pitaka consists of seven books: Dhammasangani, Vibhanga, Dhatukatha, Puggalapannatti, Kathavatthu, Yamaka, and Patthana. Each book explores different aspects of the Dhamma in great detail.
-                    </p>
-                </div>
-                <div class="card">
-                    <h2>Key Concepts in Abhidhamma</h2>
-                    <p>
-                        Some key concepts in Abhidhamma include the analysis of consciousness (citta), mental factors (cetasika), matter (rupa), and Nibbana. It also explores the concept of dependent origination (paticca samuppada) in great depth.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section id="sutta">
-            <h1>Sutta</h1>
-            <div class="card-container">
-                <div class="card">
-                    <h2>Introduction to Sutta</h2>
-                    <p>
-                        The Sutta Pitaka contains the discourses of the Buddha and his chief disciples, forming the doctrinal foundation of Theravada Buddhism. These teachings cover a wide range of topics, from practical advice for daily life to profound philosophical insights.
-                    </p>
-                </div>
-                <div class="card">
-                    <h2>Major Collections</h2>
-                    <p>
-                        The Sutta Pitaka is divided into five nikayas (collections): Digha Nikaya, Majjhima Nikaya, Samyutta Nikaya, Anguttara Nikaya, and Khuddaka Nikaya. Each collection contains suttas grouped by various criteria such as length or subject matter.
-                    </p>
-                </div>
-                <div class="card">
-                    <h2>Key Suttas</h2>
-                    <p>
-                        Some of the most famous suttas include the Dhammacakkappavattana Sutta (Setting the Wheel of Dhamma in Motion), the Maha-satipatthana Sutta (The Great Discourse on the Foundations of Mindfulness), and the Metta Sutta (Discourse on Loving-Kindness).
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section id="vinaya">
-            <h1>Vinaya</h1>
-            <div class="card-container">
-                <div class="card">
-                    <h2>Introduction to Vinaya</h2>
-                    <p>
-                        The Vinaya Pitaka is the division of the Tripitaka that contains the rules and procedures that govern the Buddhist monastic community, or sangha. It not only defines rules for monks and nuns but also provides solutions for all kinds of situations and includes stories of the Buddha and his disciples.
-                    </p>
-                </div>
-                <div class="card">
-                    <h2>Structure of the Vinaya</h2>
-                    <p>
-                        The Vinaya Pitaka is divided into three parts: the Suttavibhanga, the Khandhaka, and the Parivara. The Suttavibhanga contains the patimokkha rules for monks and nuns, along with their origin stories. The Khandhaka deals with other aspects of monastic life, while the Parivara serves as a summary and study guide.
-                    </p>
-                </div>
-                <div class="card">
-                    <h2>Relevance for Lay Practitioners</h2>
-                    <p>
-                        While the Vinaya primarily concerns monastic discipline, many of its ethical principles and guidelines for harmonious community living are valuable for lay practitioners as well. Understanding the Vinaya can deepen one's appreciation of the monastic tradition and inspire a more disciplined approach to spiritual practice.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section id="changelog">
-            <h1>Changelog</h1>
-            <div class="card-container">
-                <div class="card">
-                    <h2>Version 1.0.0 (2023-06-01)</h2>
-                    <ul>
-                        <li>Initial launch of W3Dhamma</li>
-                        <li>Added sections for Abhidhamma, Sutta, and Vinaya</li>
-                        <li>Implemented responsive design for mobile and desktop</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h2>Version 1.1.0 (2023-06-15)</h2>
-                    <ul>
-                        <li>Added space-themed animated background</li>
-                        <li>Implemented light/dark mode toggle</li>
-                        <li>Added search functionality across all sections</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h2>Version 1.2.0 (2023-07-01)</h2>
-                    <ul>
-                        <li>Improved accessibility features</li>
-                        <li>Added more content to Abhidhamma and Sutta sections</li>
-                        <li>Optimized performance for faster loading times</li>
-                    </ul>
-                </div>
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <div class="form-container">
+                <form id="contactForm" action="/submit-form" method="POST">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="message" placeholder="Your Message" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+                <div id="successMessage" class="message success-message">Your message has been sent successfully!</div>
+                <div id="errorMessage" class="message error-message">There was an error sending your message. Please try again.</div>
             </div>
         </section>
     </main>
 
-    <div class="form-container">
-        <h2>Contact Us</h2>
-        <form id="contactForm" action="https://formspree.io/f/xanyweyr" method="POST">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="message" placeholder="Your Message" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-        <div id="successMessage" class="message success-message">
-            Thank you! We'll contact you soon.
-        </div>
-        <div id="errorMessage" class="message error-message">
-            Oops! Something went wrong. Please try again.
-        </div>
-    </div>
-
     <footer>
-        <div class="card-container">
-            <div class="footer-section">
-                <h3>About W3Dhamma</h3>
-                <p class="font">
-                    W3Dhamma is a modern platform dedicated to making Buddhist teachings accessible in the digital age. We offer comprehensive resources on Abhidhamma, Sutta, and Vinaya, aiming to bridge ancient wisdom with contemporary understanding.
-                </p>
-            </div>
+        <div class="footer-content">
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul>
                     <li><a href="#home">Home</a></li>
-                    <li><a href="#abhidhamma">Abhidhamma</a></li>
-                    <li><a href="#sutta">Sutta</a></li>
-                    <li><a href="#vinaya">Vinaya</a></li>
-                    <li><a href="#changelog">Changelog</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h3>Connect</h3>
+                <h3>Connect With Us</h3>
                 <ul>
                     <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
                     <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
-                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
-                    <li><a href="#"><i class="far fa-envelope"></i> Contact Us</a></li>
+                    <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                    <li><a href="#"><i class="fab fa-github"></i> GitHub</a></li>
                 </ul>
             </div>
         </div>
-        <div class="copyright">
-            &copy; 2024 W3Dhamma. All rights reserved.
-        </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-    <script src="script.js"></script>
-    <script src="animations.js"></script>
-     <script src="contactForm.js"></script>
-     <script src="darkMode.js"></script>
-     <script src="main.js"></script>
-     <script src="navigation.js"></script>
-     <script src="particles.js"></script>
-     <script src="search.js"></script>
-     <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script type="module" src="assets/js/main.js"></script>
 </body>
 </html>
+
