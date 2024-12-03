@@ -9,9 +9,9 @@ const loadMoreButton = document.querySelector('.load-more');
 let allResults = [];
 let currentPage = 1;
 const resultsPerPage = 10;
-let htmlFiles = [];
 
 const BASE_URL = 'https://w3dhamma.github.io/w3demo/subject/abhidhamma/';
+const MAX_FILES = 500; // Adjust this number based on your actual file count
 
 searchToggle.addEventListener('click', () => {
     searchOverlay.classList.add('active');
@@ -28,44 +28,14 @@ searchClose.addEventListener('click', () => {
     loadMoreButton.style.display = 'none';
 });
 
-async function discoverHtmlFiles() {
-    try {
-        // First, try to fetch the directory listing
-        const response = await fetch(BASE_URL);
-        const html = await response.text();
-        
-        // Create a temporary element to parse the HTML
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
-        
-        // Find all links that end with .html
-        const links = Array.from(doc.querySelectorAll('a'))
-            .filter(link => link.href.endsWith('.html'))
-            .map(link => {
-                // Extract just the filename from the full URL
-                const url = new URL(link.href);
-                return url.pathname.split('/').pop();
-            });
-
-        // Store the discovered files
-        htmlFiles = links;
-        console.log(`Discovered ${htmlFiles.length} HTML files`);
-    } catch (error) {
-        console.error('Error discovering HTML files:', error);
-        // Fallback to checking sequential numbers if directory listing fails
-        htmlFiles = [];
-        for(let i = 1; i <= 999; i++) {
-            const paddedNumber = i.toString().padStart(4, '0');
-            htmlFiles.push(`${paddedNumber}.html`);
-        }
-    }
-}
-
 async function fetchAndSearchFile(filename) {
     try {
         const response = await fetch(`${BASE_URL}${filename}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const html = await response.text();
-        return html;
+        return { filename, html };
     } catch (error) {
         console.error(`Error fetching ${filename}:`, error);
         return null;
@@ -87,43 +57,38 @@ async function performSearch() {
     searchAnimation.classList.add('active');
 
     try {
-        if (htmlFiles.length === 0) {
-            await discoverHtmlFiles();
-        }
-
         allResults = [];
         let searchPromises = [];
 
-        // Create a promise for each file
-        for (const filename of htmlFiles) {
-            searchPromises.push(
-                fetchAndSearchFile(filename).then(html => {
-                    if (!html) return null;
-
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(html, 'text/html');
-                    const sections = doc.querySelectorAll('section');
-                    
-                    sections.forEach(section => {
-                        const sectionText = section.textContent.toLowerCase();
-                        if (sectionText.includes(searchTerm)) {
-                            const title = section.querySelector('h1, h2, h3, h4, h5, h6')?.textContent || 
-                                        `Section from ${filename}`;
-                            const snippet = getSnippet(sectionText, searchTerm);
-                            allResults.push({
-                                title,
-                                snippet,
-                                file: filename,
-                                id: section.id
-                            });
-                        }
-                    });
-                })
-            );
+        for (let i = 1; i <= MAX_FILES; i++) {
+            const filename = `${i.toString().padStart(4, '0')}.html`;
+            searchPromises.push(fetchAndSearchFile(filename));
         }
 
-        // Wait for all searches to complete
-        await Promise.all(searchPromises);
+        const results = await Promise.all(searchPromises);
+
+        results.forEach(result => {
+            if (result) {
+                const { filename, html } = result;
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const sections = doc.querySelectorAll('section');
+                
+                sections.forEach(section => {
+                    const sectionText = section.textContent.toLowerCase();
+                    if (sectionText.includes(searchTerm)) {
+                        const title = section.querySelector('h1, h2, h3, h4, h5, h6')?.textContent || `Section from ${filename}`;
+                        const snippet = getSnippet(sectionText, searchTerm);
+                        allResults.push({
+                            title,
+                            snippet,
+                            file: filename,
+                            id: section.id
+                        });
+                    }
+                });
+            }
+        });
 
         if (allResults.length === 0) {
             searchMessage.textContent = 'No results found.';
@@ -146,7 +111,6 @@ function getSnippet(text, term) {
     const end = Math.min(text.length, index + term.length + 50);
     let snippet = text.slice(start, end);
     
-    // Add ellipsis if we're not at the start/end of the text
     if (start > 0) snippet = '...' + snippet;
     if (end < text.length) snippet = snippet + '...';
     
@@ -201,7 +165,4 @@ loadMoreButton.addEventListener('click', () => {
         displayResults();
     }, 1000);
 });
-
-// Initialize file discovery when the script loads
-discoverHtmlFiles();
 
