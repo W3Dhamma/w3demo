@@ -347,11 +347,6 @@ p {
     flex-grow: 1;
 }
 
- .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-
 footer {
     background-color: var(--nav-bg);
     color: var(--text-color);
@@ -653,6 +648,17 @@ footer {
     max-width: 300px;
     margin: 0 auto;
     display: none;
+}
+
+.search-animation.active {
+    display: block;
+}
+
+.search-animation {
+    display: none;
+    width: 100px;
+    height: 100px;
+    margin: 20px auto;
 }
 
 .search-animation.active {
