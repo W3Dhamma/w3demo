@@ -31,7 +31,14 @@ body {
     transition: background-color 0.3s, color 0.3s;
     overflow-x: hidden;
 }
+body {
+    overflow: -moz-scrollbars-none;  /* Firefox */
+    scrollbar-width: none;           /* Firefox */
+}
 
+body::-webkit-scrollbar {  /* Chrome, Safari, Edge */
+    display: none;
+}
 #particles-js {
     position: fixed;
     top: 0;
