@@ -1,0 +1,29 @@
+.popup-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.5s ease, transform 0.3s ease;
+}
+
+.popup-message.fade-out {
+    opacity: 0;
+    transform: translate(-50%, -55%);
+}
+
+.side-nav2 {
+    display: none;
+    /* Add styling for your side navigation */
+}
+
+.side-nav2.open {
+    display: block;
+    /* Add styles for when the navigation is open */
+}
